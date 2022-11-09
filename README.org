@@ -1,0 +1,5 @@
+*iabbrev* is an Emacs package to instantly expand abbreviations. The best use-case is with Latex. Inspired by [[https://www.texmacs.org/][TeXmacs]].
+
+Features
+- iabbrev
+- tabswaps
