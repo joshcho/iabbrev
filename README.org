@@ -1,5 +1,30 @@
-*iabbrev* is an Emacs package to instantly expand abbreviations. The best use-case is with Latex. Inspired by [[https://www.texmacs.org/][TeXmacs]].
+* iabbrev
+~iabbrev~ is an Emacs package that provides instant expansion of abbreviations. It is particularly useful in LaTeX documents, where abbreviations are frequently used.
 
-Features
-- iabbrev
-- tabswaps
+* Features
+- Instant expansion of abbreviations with a single click or key press.
+- Tab cycling through multiple possible expansions of an abbreviation.
+- Easy customization of abbreviation expansions through the ~iabbrev-table~ variable.
+- Support for logical connectives in LaTeX documents (e.g. and, or) with automatic expansion when the cursor is inside a math environment.
+* Usage
+To use iabbrev, first add the desired abbreviations and their expansions to the ~iabbrev-table~ variable. For example:
+
+#+begin_src emacs-lisp
+(setq iabbrev-table (ht-create))
+(iabbrev-add-abbreviation "ZZ" "\\mathbb{Z}")
+(iabbrev-add-abbreviation "<" "\\langle")
+#+end_src
+
+To enable ~iabbrev~ in a buffer, call the ~iabbrev-if-abbrev-expand~ function. For example:
+
+#+begin_src emacs-lisp
+(add-hook 'TeX-mode-hook
+          (lambda () (add-hook 'post-self-insert-hook #'iabbrev-if-abbrev-expand nil 'local)))
+#+end_src
+
+This will enable ~iabbrev~ in LaTeX mode, and expand abbreviations whenever a character is inserted in the buffer.
+
+To cycle through possible expansions of an abbreviation, type the abbreviation and press TAB. This will expand the abbreviation into the first possible expansion. Pressing TAB again will cycle through the remaining expansions.
+
+* Customization
+The ~iabbrev-table~ variable contains the mapping of abbreviations to their possible expansions. It is a hash table, where the keys are the abbreviations and the values
